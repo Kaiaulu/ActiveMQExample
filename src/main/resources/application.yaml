@@ -1,0 +1,13 @@
+spring.boot:
+    admin.url: http://localhost:8080
+
+management:
+    security.enabled: false
+
+app:
+
+    activemq:
+        host: localhost
+        port: 32778
+        username: admin
+        password: admin
