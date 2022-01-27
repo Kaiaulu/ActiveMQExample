@@ -24,8 +24,8 @@ public class ActiveMQBadListener extends RouteBuilder {
                 .end();
 
         from("activemq:task-queue-B")
-                .routeId("simple-object-exception-route-B")
-                .log(LoggingLevel.INFO, "Reading from RabbitMq to throw exception ${headers}")
+                .routeId("simple-object-route-B")
+                .log(LoggingLevel.INFO, "Reading from ActiveMQ to throw exception ${headers}")
                 .unmarshal().json(JsonLibrary.Jackson, SimpleObject.class)
                 .log(LoggingLevel.INFO, String.format("Received ${body.firstName} - ${body.lastName}"))
                 .throwException(new RuntimeException())

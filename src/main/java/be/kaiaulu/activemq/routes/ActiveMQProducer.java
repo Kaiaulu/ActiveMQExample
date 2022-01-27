@@ -18,8 +18,10 @@ public class ActiveMQProducer extends RouteBuilder {
     public void configure() throws Exception {
 
         from("timer:foobar?period=2000")
-                .log(LoggingLevel.INFO, "Sending to RabbitMq")
+                .log(LoggingLevel.INFO, "Sending to ActiveMQ")
                 .bean(simpleBean)
+                .setProperty("test", constant("the property"))
+                .setHeader("test", constant("the header"))
                 .marshal().json(JsonLibrary.Jackson, true)
                 .to("activemq:task-queue-A")
                 .to("activemq:task-queue-B")

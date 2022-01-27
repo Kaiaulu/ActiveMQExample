@@ -8,6 +8,6 @@ app:
 
     activemq:
         host: localhost
-        port: 32778
+        port: 61616
         username: admin
         password: admin

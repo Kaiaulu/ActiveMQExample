@@ -14,7 +14,7 @@ public class ActiveMQListener extends RouteBuilder {
     public void configure() throws Exception {
 
         onException(RuntimeException.class)
-                .routeId("simple-object-exception-route-B")
+                .routeId("simple-object-exception-route-A")
                 .handled(true)
                 .log(LoggingLevel.INFO, "Exception on processing")
                 .marshal().json(JsonLibrary.Jackson, SimpleObject.class)
@@ -24,10 +24,10 @@ public class ActiveMQListener extends RouteBuilder {
                 .end();
 
         from("activemq:task-queue-A")
-                .routeId("simple-object-exception-route-A")
-                .log(LoggingLevel.INFO, "Reading from RabbitMq")
+                .routeId("simple-object-route-A")
+                .log(LoggingLevel.INFO, "Reading from ActiveMQ")
                 .unmarshal().json(JsonLibrary.Jackson, SimpleObject.class)
-                .log(LoggingLevel.INFO, String.format("Received ${body.firstName} - ${body.lastName}"))
+                .log(LoggingLevel.INFO, "Received ${body.firstName} - ${body.lastName} with property : `${exchangeProperty.test}` and header : `${headers.test}`")
                 .end();
     }
 }
